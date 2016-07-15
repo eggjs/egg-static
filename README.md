@@ -33,9 +33,9 @@ $ npm i egg-static --save
 - plugin.js
 
 ```js
-exports.session = {
+exports.static = {
   enable: true,
-  package: 'egg-session',
+  package: 'egg-static',
 };
 ```
 
