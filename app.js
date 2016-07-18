@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(app) {
+module.exports = app => {
   const index = app.config.coreMiddleware.indexOf('bodyParser');
   if (index === -1) {
     app.config.coreMiddleware.push('static');
