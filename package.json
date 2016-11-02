@@ -42,12 +42,12 @@
     "test": "npm run lint && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
-    "lint": "eslint --ext js . --fix",
+    "lint": "eslint --ext js .",
     "ci": "npm run lint && npm run cov",
     "autod": "autod"
   },
   "ci": {
-    "version": "4, 6"
+    "version": "4, 6, 7"
   },
   "author": "dead_horse",
   "license": "MIT"
