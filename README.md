@@ -41,7 +41,18 @@ exports.static = {
 
 ## Configuration
 
-Support all configurations in [koa-static-cache](https://github.com/koajs/static-cache).
+`egg-static` support all configurations in [koa-static-cache](https://github.com/koajs/static-cache). and with below default configurations:
+
+- prefix: `'/public/'`
+- dir: `path.join(appInfo.baseDir, 'app/public')`
+- dynamic: `true`
+- preload: `false`
+- maxAge: `31536000` in prod env, `0` in other envs
+- buffer: `true` in prod env, `false` in other envs
+
+With these default configurations, all static files in `$baseDir/app/public` can be visited with prefix `/public`, and all the files are lazy loaded.
+
+In production environment, files will be cached in memory, you need to restart the process to update the assets.
 
 ## Questions & Suggestions
 
