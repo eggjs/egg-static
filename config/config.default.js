@@ -11,7 +11,8 @@ module.exports = appInfo => {
    * @member Config#static
    * @property {String} prefix - `/public/` by default
    * @property {String} dir - static files store dir, `${baseDir}/app/public` by default
-   * @property {Number} maxAge - cache max age, default is one year
+   * @property {Number} maxAge - cache max age, default is 0
+   * @see https://github.com/koajs/static-cache
    */
   exports.static = {
     prefix: '/public/',

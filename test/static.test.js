@@ -12,6 +12,7 @@ describe('test/static.test.js', () => {
     before(() => {
       app = mm.app({
         baseDir: 'static-server',
+        customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       return app.ready();
     });
@@ -44,6 +45,7 @@ describe('test/static.test.js', () => {
       fs.writeFileSync(jsFile, 'console.log(\'a\')');
       app = mm.app({
         baseDir: 'static-server-dist',
+        customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       return app.ready();
     });
@@ -81,9 +83,12 @@ describe('test/static.test.js', () => {
     before(() => {
       app = mm.app({
         baseDir: 'static-server-custom',
+        customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       return app.ready();
     });
+
+    after(() => app.close());
 
     it('should get js', () => {
       return request(app.callback())
