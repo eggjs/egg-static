@@ -17,9 +17,10 @@ module.exports = appInfo => {
   exports.static = {
     prefix: '/public/',
     dir: path.join(appInfo.baseDir, 'app/public'),
-    // maxAge: 31536000,
-    // buffer: false,
-    // dynamic: false,
+    // support lazy load
+    dynamic: true,
+    preload: false,
+    buffer: false,
   };
   return exports;
 };

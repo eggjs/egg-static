@@ -22,8 +22,6 @@
 
 Static server plugin for egg, base on [koa-static-cache](https://github.com/koajs/static-cache).
 
-> Note: `koa-static-cache` cache the assets on initialization, so you need to restart the process to update the assets, and don't put too many files in it, or use `filter` options.
-
 ## Install
 
 ```bash
@@ -41,7 +39,19 @@ exports.static = true;
 
 ## Configuration
 
-Support all configurations in [koa-static-cache](https://github.com/koajs/static-cache).
+egg-static support all configurations in [koa-static-cache](https://github.com/koajs/static-cache). and with default configurations below:
+
+- prefix: `/public/`
+- dir: `path.join(appInfo.baseDir, 'app/public')`
+- dynamic: `true`
+- preload: `false`
+- maxAge: `31536000` in prod env, `0` in other envs
+- buffer: `true` in prod env, `false` in other envs
+
+**All static files in `$baseDir/app/public` can be visited with prefix `/public`, and all the files are lazy loaded.**
+
+- In non-production environment, assets won't be cached, your modification can take effect immediately.
+- In production environment, `egg-static` will cache the assets after visited, you need to restart the process to update the assets.
 
 ```js
 // {app_root}/config/config.default.js

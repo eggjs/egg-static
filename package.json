@@ -20,20 +20,18 @@
     "static"
   ],
   "dependencies": {
-    "koa-static-cache": "^3.1.7",
+    "koa-static-cache": "^3.2.0",
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
-    "autod": "^2.6.1",
+    "autod": "^2.7.1",
     "egg": "*",
-    "egg-bin": "^1.0.2",
-    "egg-ci": "^1.0.2",
-    "egg-mock": "*",
-    "eslint": "^3.0.1",
-    "eslint-config-egg": "^3.1.0",
-    "should": "^9.0.2",
-    "supertest": "^1.2.0",
-    "supertest-as-promised": "^3.2.0"
+    "egg-bin": "^1.10.0",
+    "egg-ci": "^1.1.0",
+    "egg-mock": "^1.2.0",
+    "eslint": "^3.13.0",
+    "eslint-config-egg": "^3.2.0",
+    "supertest": "^2.0.1"
   },
   "engines": {
     "node": ">=4.0.0"

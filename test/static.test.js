@@ -2,8 +2,8 @@
 
 const path = require('path');
 const fs = require('fs');
-const should = require('should');
-const request = require('supertest-as-promised');
+const assert = require('assert');
+const request = require('supertest');
 const mm = require('egg-mock');
 
 describe('test/static.test.js', () => {
@@ -66,7 +66,7 @@ describe('test/static.test.js', () => {
         .get('/static/app/a.js')
         .expect('console.log(\'a\')')
         .expect(200, err => {
-          should.not.exists(err);
+          assert(!err);
 
           fs.writeFile(jsFile, 'console.log(\'b\')', () => {
             request(app.callback())
