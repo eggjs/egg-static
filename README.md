@@ -22,8 +22,6 @@
 
 Static server plugin for egg, base on [koa-static-cache](https://github.com/koajs/static-cache).
 
-> Note: `koa-static-cache` cache the assets on initialization, so you need to restart the process to update the assets, and don't put too many files in it, or use `filter` options.
-
 ## Install
 
 ```bash
