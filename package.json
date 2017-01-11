@@ -31,8 +31,7 @@
     "egg-mock": "^1.2.0",
     "eslint": "^3.13.0",
     "eslint-config-egg": "^3.2.0",
-    "supertest": "^2.0.1",
-    "supertest-as-promised": "^4.0.2"
+    "supertest": "^2.0.1"
   },
   "engines": {
     "node": ">=4.0.0"
