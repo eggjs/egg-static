@@ -1,4 +1,10 @@
 
+1.1.0 / 2017-01-13
+==================
+
+  * feat: default lazyload (#4)
+  * docs: note for koa-static-cache (#3)
+
 1.0.0 / 2016-11-02
 ==================
 
