@@ -16,7 +16,8 @@
   },
   "keywords": [
     "egg",
-    "plugin",
+    "egg-plugin",
+    "eggPlugin",
     "static"
   ],
   "dependencies": {
@@ -25,27 +26,27 @@
   },
   "devDependencies": {
     "autod": "^2.7.1",
-    "egg": "*",
-    "egg-bin": "^1.10.0",
+    "egg": "^0.9.0",
+    "egg-bin": "^2.0.2",
     "egg-ci": "^1.1.0",
-    "egg-mock": "^1.2.0",
-    "eslint": "^3.13.0",
+    "egg-mock": "^2.3.1",
+    "eslint": "^3.14.1",
     "eslint-config-egg": "^3.2.0",
-    "supertest": "^2.0.1"
+    "supertest": "^3.0.0"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "scripts": {
-    "test": "npm run lint && npm run test-local",
+    "lint": "eslint .",
+    "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
-    "lint": "eslint --ext js .",
     "ci": "npm run lint && npm run cov",
     "autod": "autod"
   },
   "ci": {
-    "version": "4, 6, 7"
+    "version": "6, 7"
   },
   "author": "dead_horse",
   "license": "MIT"
