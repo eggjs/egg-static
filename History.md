@@ -1,4 +1,10 @@
 
+1.2.0 / 2017-02-21
+==================
+
+  * deps: upgrade koa-static-cache to 4.x (#6)
+  * chore: upgrade deps and fix test (#5)
+
 1.1.0 / 2017-01-13
 ==================
 
