@@ -5,6 +5,7 @@ const fs = require('fs');
 const assert = require('assert');
 const request = require('supertest');
 const mm = require('egg-mock');
+const os = require('os');
 
 describe('test/static.test.js', () => {
   describe('serve public', () => {
@@ -21,7 +22,7 @@ describe('test/static.test.js', () => {
     it('should get exists js file', () => {
       return request(app.callback())
         .get('/public/foo.js')
-        .expect('alert(\'bar\');\n')
+        .expect('alert(\'bar\');' + os.EOL)
         .expect(200);
     });
 
