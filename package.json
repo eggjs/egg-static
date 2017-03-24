@@ -21,6 +21,7 @@
     "static"
   ],
   "dependencies": {
+    "koa-compose": "^2.5.1",
     "koa-static-cache": "^4.0.0",
     "mkdirp": "^0.5.1"
   },
