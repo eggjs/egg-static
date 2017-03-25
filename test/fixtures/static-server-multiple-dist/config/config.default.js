@@ -8,7 +8,7 @@ module.exports = appInfo => {
   return {
     static: {
       prefix: '/static',
-      dir: dirs.join(','),
+      dir: dirs,
       buffer: true,
     }
   };

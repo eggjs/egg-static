@@ -5,11 +5,10 @@ const assert = require('assert');
 const mkdirp = require('mkdirp');
 
 module.exports = (options, app) => {
-  assert.strictEqual(typeof options.dir, 'string', 'Must set `app.config.static.dir` when static plugin enable');
+  const dirs = options.dir;
 
-  const dirs = options.dir.split(',');
-
-  if (dirs.length === 1) {
+  if (!Array.isArray(dirs)) {
+    assert.strictEqual(typeof options.dir, 'string', 'Must set `app.config.static.dir` when static plugin enable');
     // ensure directory exists
     mkdirp.sync(options.dir);
 
@@ -20,14 +19,15 @@ module.exports = (options, app) => {
 
   const middlewares = [];
 
-  for (const dir of dirs) {
+  for (const [ idx, dir ] of dirs.entries()) {
     // copy origin options to new options
     // ensure the safety of objects
     const newOptions = Object.assign({}, options);
     newOptions.dir = dir;
+    assert.strictEqual(typeof newOptions.dir, 'string', 'Must set `app.config.static.dir[' + idx + ']` when static plugin enable');
 
     // ensure directory exists
-    mkdirp.sync(dir);
+    mkdirp.sync(newOptions.dir);
 
     app.loggers.coreLogger.info('[egg-static] starting static serve %s -> %s', newOptions.prefix, newOptions.dir);
 
