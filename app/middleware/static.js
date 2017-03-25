@@ -20,11 +20,10 @@ module.exports = (options, app) => {
 
   const middlewares = [];
 
-  for (let i = 0; i < dirs.length; i++) {
+  for (const dir of dirs) {
     // copy origin options to new options
     // ensure the safety of objects
     const newOptions = Object.assign({}, options);
-    const dir = dirs[i];
     newOptions.dir = dir;
 
     // ensure directory exists
