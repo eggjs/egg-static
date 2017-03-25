@@ -21,6 +21,7 @@
     "static"
   ],
   "dependencies": {
+    "koa-compose": "^2.5.1",
     "koa-static-cache": "^4.0.0",
     "mkdirp": "^0.5.1"
   },
@@ -32,6 +33,7 @@
     "egg-mock": "^3.0.0",
     "eslint": "^3.16.0",
     "eslint-config-egg": "^3.2.0",
+    "mz": "^2.6.0",
     "supertest": "^3.0.0"
   },
   "engines": {
