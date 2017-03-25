@@ -1,1 +1,1 @@
-alert('bar');
+console.log('bar');

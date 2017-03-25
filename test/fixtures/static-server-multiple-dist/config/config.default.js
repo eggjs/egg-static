@@ -1,7 +1,9 @@
-module.exports = info => {
+const path = require('path');
+
+module.exports = appInfo => {
   const dirs = [
-    info.baseDir + '/dist/static',
-    info.baseDir + '/app/public'
+    path.join(appInfo.baseDir, '/dist/static'),
+    path.join(appInfo.baseDir, '/app/public')
   ];
   return {
     static: {

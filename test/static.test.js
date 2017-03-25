@@ -1,11 +1,10 @@
 'use strict';
 
 const path = require('path');
-const fs = require('fs');
+const fs = require('mz/fs');
 const assert = require('assert');
 const request = require('supertest');
 const mm = require('egg-mock');
-const os = require('os');
 
 describe('test/static.test.js', () => {
   describe('serve public', () => {
@@ -13,16 +12,16 @@ describe('test/static.test.js', () => {
     before(() => {
       app = mm.app({
         baseDir: 'static-server',
-        customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       return app.ready();
     });
+
     after(() => app.close());
 
     it('should get exists js file', () => {
       return request(app.callback())
         .get('/public/foo.js')
-        .expect('alert(\'bar\');' + os.EOL)
+        .expect(/console.log\(\'bar\'\);[\r\n]/)
         .expect(200);
     });
 
@@ -46,14 +45,12 @@ describe('test/static.test.js', () => {
       fs.writeFileSync(jsFile, 'console.log(\'a\')');
       app = mm.app({
         baseDir: 'static-server-dist',
-        customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       return app.ready();
     });
-    after(done => {
-      app.close();
-      fs.unlink(jsFile, done);
-    });
+
+    after(() => app.close());
+    after(() => fs.unlink(jsFile));
 
     it('should get js', () => {
       return request(app.callback())
@@ -84,7 +81,6 @@ describe('test/static.test.js', () => {
     before(() => {
       app = mm.app({
         baseDir: 'static-server-custom',
-        customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       return app.ready();
     });
@@ -106,19 +102,17 @@ describe('test/static.test.js', () => {
       fs.writeFileSync(jsFile, 'console.log(\'a\')');
       app = mm.app({
         baseDir: 'static-server-multiple-dist',
-        customEgg: path.join(__dirname, '../node_modules/egg'),
       });
       return app.ready();
     });
-    after(done => {
-      app.close();
-      fs.unlink(jsFile, done);
-    });
+
+    after(() => app.close());
+    after(() => fs.unlink(jsFile));
 
     it('should get js correct from public folder', () => {
       return request(app.callback())
         .get('/static/foo.js')
-        .expect('alert(\'bar\');' + os.EOL)
+        .expect(/console.log\(\'bar\'\);[\r\n]/)
         .expect(200);
     });
 
