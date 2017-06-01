@@ -3,9 +3,13 @@
 const staticCache = require('koa-static-cache');
 const assert = require('assert');
 const mkdirp = require('mkdirp');
+const LRU = require('ylru');
 
 module.exports = (options, app) => {
   const dirs = options.dir;
+  if (options.dynamic && !options.files) {
+    options.files = new LRU(options.maxFiles);
+  }
 
   if (!Array.isArray(dirs)) {
     assert.strictEqual(typeof options.dir, 'string', 'Must set `app.config.static.dir` when static plugin enable');
