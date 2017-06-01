@@ -48,6 +48,10 @@ egg-static support all configurations in [koa-static-cache](https://github.com/k
 - maxAge: `31536000` in prod env, `0` in other envs
 - buffer: `true` in prod env, `false` in other envs
 
+`egg-static` provides one more option:
+
+- maxFiles: the maximum value of cache items, only effective when dynamic is true, default is `1000`.
+
 **All static files in `$baseDir/app/public` can be visited with prefix `/public`, and all the files are lazy loaded.**
 
 - In non-production environment, assets won't be cached, your modification can take effect immediately.

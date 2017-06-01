@@ -21,6 +21,7 @@ module.exports = appInfo => {
     dynamic: true,
     preload: false,
     buffer: false,
+    maxFiles: 1000,
   };
   return exports;
 };

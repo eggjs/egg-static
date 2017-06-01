@@ -22,8 +22,9 @@
   ],
   "dependencies": {
     "koa-compose": "^2.5.1",
-    "koa-static-cache": "^4.0.0",
-    "mkdirp": "^0.5.1"
+    "koa-static-cache": "^4.1.0",
+    "mkdirp": "^0.5.1",
+    "ylru": "^1.0.0"
   },
   "devDependencies": {
     "autod": "^2.7.1",
