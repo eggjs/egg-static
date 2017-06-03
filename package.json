@@ -49,7 +49,8 @@
     "autod": "autod"
   },
   "ci": {
-    "version": "6, 7, 8"
+    "version": "6, 7, 8",
+    "license": true
   },
   "author": "dead_horse",
   "license": "MIT"
