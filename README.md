@@ -30,12 +30,7 @@ $ npm i egg-static --save
 
 ## Usage
 
-`egg-static` is a plugin that has been built-in for egg. But it is disabled by default.
-
-```js
-// {app_root}/config/plugin.js
-exports.static = true;
-```
+`egg-static` is a plugin that has been built-in for egg. It is enabled by default.
 
 ## Configuration
 
