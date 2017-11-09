@@ -1,4 +1,11 @@
 
+2.0.0 / 2017-11-09
+==================
+
+**others**
+  * [[`bc2d05c`](http://github.com/eggjs/egg-static/commit/bc2d05c10fe6aabc3e0190a20866dd45f4134dda)] - refactor: upgrade dependencies and support egg@2 (#11) (Yiyu He <<dead_horse@qq.com>>)
+  * [[`779e4fa`](http://github.com/eggjs/egg-static/commit/779e4fa7d171fa7e1c51c902e9b47be9632cb35d)] - docs: update usage (#10) (TZ | 天猪 <<atian25@qq.com>>)
+
 1.4.1 / 2017-06-04
 ==================
 
