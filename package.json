@@ -21,24 +21,24 @@
     "static"
   ],
   "dependencies": {
-    "koa-compose": "^2.5.1",
-    "koa-static-cache": "^4.1.0",
+    "koa-compose": "^4.0.0",
+    "koa-static-cache": "^5.1.1",
     "mkdirp": "^0.5.1",
-    "ylru": "^1.0.0"
+    "ylru": "^1.2.0"
   },
   "devDependencies": {
-    "autod": "^2.7.1",
-    "egg": "^0.12.0",
-    "egg-bin": "^2.2.1",
-    "egg-ci": "^1.1.0",
-    "egg-mock": "^3.0.0",
-    "eslint": "^3.16.0",
-    "eslint-config-egg": "^3.2.0",
-    "mz": "^2.6.0",
+    "autod": "^2.10.1",
+    "egg": "next",
+    "egg-bin": "^4.3.5",
+    "egg-ci": "^1.8.0",
+    "egg-mock": "^3.13.1",
+    "eslint": "^4.10.0",
+    "eslint-config-egg": "^5.1.1",
+    "mz": "^2.7.0",
     "supertest": "^3.0.0"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "scripts": {
     "lint": "eslint .",
@@ -49,7 +49,7 @@
     "autod": "autod"
   },
   "ci": {
-    "version": "6, 7, 8",
+    "version": "8, 9",
     "license": true
   },
   "author": "dead_horse",
