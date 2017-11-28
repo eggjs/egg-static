@@ -36,7 +36,7 @@ $ npm i egg-static --save
 
 egg-static support all configurations in [koa-static-cache](https://github.com/koajs/static-cache). and with default configurations below:
 
-- prefix: `/public/`
+- prefix: `'/public/'`
 - dir: `path.join(appInfo.baseDir, 'app/public')`
 - dynamic: `true`
 - preload: `false`
