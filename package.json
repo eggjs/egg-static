@@ -22,6 +22,7 @@
   ],
   "dependencies": {
     "koa-compose": "^4.0.0",
+    "koa-range": "^0.3.0",
     "koa-static-cache": "^5.1.1",
     "mkdirp": "^0.5.1",
     "ylru": "^1.2.0"

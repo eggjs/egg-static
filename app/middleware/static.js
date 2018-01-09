@@ -1,5 +1,7 @@
 'use strict';
 
+const range = require('koa-range');
+const compose = require('koa-compose');
 const staticCache = require('koa-static-cache');
 const assert = require('assert');
 const mkdirp = require('mkdirp');
@@ -18,10 +20,10 @@ module.exports = (options, app) => {
 
     app.loggers.coreLogger.info('[egg-static] starting static serve %s -> %s', options.prefix, options.dir);
 
-    return staticCache(options);
+    return compose([ range, staticCache(options) ]);
   }
 
-  const middlewares = [];
+  const middlewares = [ range ];
 
   for (const [ idx, dir ] of dirs.entries()) {
     // copy origin options to new options
@@ -38,6 +40,5 @@ module.exports = (options, app) => {
     middlewares.push(staticCache(newOptions));
   }
 
-  const compose = require('koa-compose');
   return compose(middlewares);
 };
