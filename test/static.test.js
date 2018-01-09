@@ -43,6 +43,7 @@ describe('test/static.test.js', () => {
         .expect('Content-Length', '11')
         .expect('Accept-Ranges', 'bytes')
         .expect('Content-Range', 'bytes 0-10/20')
+        .expect('console.log')
         .expect(206);
     });
   });
