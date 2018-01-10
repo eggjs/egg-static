@@ -36,6 +36,16 @@ describe('test/static.test.js', () => {
         .get('/public/foo404.js')
         .expect(404);
     });
+    it('should return 206 with partial content', () => {
+      return request(app.callback())
+        .get('/public/foo.js')
+        .set('range', 'bytes=0-10')
+        .expect('Content-Length', '11')
+        .expect('Accept-Ranges', 'bytes')
+        .expect('Content-Range', 'bytes 0-10/20')
+        .expect('console.log')
+        .expect(206);
+    });
   });
 
   describe('serve dist', () => {
