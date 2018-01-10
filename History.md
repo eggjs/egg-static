@@ -1,4 +1,13 @@
 
+2.1.0 / 2018-01-10
+==================
+
+**features**
+  * [[`cd35dea`](http://github.com/eggjs/egg-static/commit/cd35dea2ccf98dc7fed7d36a25f5555f3712eb8f)] - feat: add range support (#13) (HelloYou <<helloyou2012@yeah.net>>)
+
+**others**
+  * [[`93a56c1`](http://github.com/eggjs/egg-static/commit/93a56c1af60c69cd814d33696224a7f044034da6)] - docs: fix confusion for option:prefix (#12) (Airyland <<i@mao.li>>)
+
 2.0.0 / 2017-11-09
 ==================
 
