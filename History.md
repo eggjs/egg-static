@@ -1,4 +1,13 @@
 
+1.5.0 / 2018-01-10
+==================
+
+**features**
+  * [[`652d233`](http://github.com/eggjs/egg-static/commit/652d2333e8973f810f7c0e97e07591575b8dc5eb)] - feat: add range support (#13) (HelloYou <<helloyou2012@yeah.net>>)
+
+**others**
+  * [[`deae06a`](http://github.com/eggjs/egg-static/commit/deae06a7e8c8f424fde234877e5eb3544bda7bca)] - deps: koa-range@0.2.2 (dead-horse <<dead_horse@qq.com>>)
+
 1.4.1 / 2017-06-04
 ==================
 
