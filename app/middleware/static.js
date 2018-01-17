@@ -9,6 +9,12 @@ const LRU = require('ylru');
 
 module.exports = (options, app) => {
   const dirs = options.dir;
+  const middlewares = [];
+
+  if (!options.disableRange) {
+    middlewares.push(range);
+  }
+
   if (options.dynamic && !options.files) {
     options.files = new LRU(options.maxFiles);
   }
@@ -20,10 +26,11 @@ module.exports = (options, app) => {
 
     app.loggers.coreLogger.info('[egg-static] starting static serve %s -> %s', options.prefix, options.dir);
 
-    return compose([ range, staticCache(options) ]);
+    middlewares.push(staticCache(options));
+
+    return compose(middlewares);
   }
 
-  const middlewares = [ range ];
 
   for (const [ idx, dir ] of dirs.entries()) {
     // copy origin options to new options
