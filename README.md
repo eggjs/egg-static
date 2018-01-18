@@ -45,6 +45,8 @@ egg-static support all configurations in [koa-static-cache](https://github.com/k
 
 `egg-static` provides one more option:
 
+- range: (bool) - range request implementation for egg-static or not, default is `true`.
+
 - maxFiles: the maximum value of cache items, only effective when dynamic is true, default is `1000`.
 
 **All static files in `$baseDir/app/public` can be visited with prefix `/public`, and all the files are lazy loaded.**

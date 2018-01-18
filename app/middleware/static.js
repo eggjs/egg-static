@@ -11,7 +11,7 @@ module.exports = (options, app) => {
   const dirs = options.dir;
   const middlewares = [];
 
-  if (!options.disableRange) {
+  if (options.range !== false) {
     middlewares.push(range);
   }
 
