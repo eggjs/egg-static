@@ -46,6 +46,13 @@ describe('test/static.test.js', () => {
         .expect('console.log')
         .expect(206);
     });
+    it('should range don\'t effect non static router', () => {
+      return request(app.callback())
+        .get('/foo/bar')
+        .set('range', 'bytes=0-5')
+        .expect('hello world')
+        .expect(200);
+    });
   });
 
   describe('serve dist', () => {
@@ -124,6 +131,17 @@ describe('test/static.test.js', () => {
         .get('/static/foo.js')
         .expect(/console.log\(\'bar\'\);[\r\n]/)
         .expect(200);
+    });
+
+    it('should get js correct with range support', () => {
+      return request(app.callback())
+        .get('/static/foo.js')
+        .set('range', 'bytes=0-10')
+        .expect('Content-Length', '11')
+        .expect('Accept-Ranges', 'bytes')
+        .expect('Content-Range', 'bytes 0-10/20')
+        .expect('console.log')
+        .expect(206);
     });
 
     it('should get js correct from dist folder', () => {
