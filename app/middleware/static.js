@@ -13,6 +13,11 @@ module.exports = (options, app) => {
     options.files = new LRU(options.maxFiles);
   }
 
+  function* rangeMiddleware(next) {
+    if (options.prefix && !this.path.startsWith(options.prefix)) return yield next;
+    return yield range.call(this, next);
+  }
+
   if (!Array.isArray(dirs)) {
     assert.strictEqual(typeof options.dir, 'string', 'Must set `app.config.static.dir` when static plugin enable');
     // ensure directory exists
@@ -20,10 +25,10 @@ module.exports = (options, app) => {
 
     app.loggers.coreLogger.info('[egg-static] starting static serve %s -> %s', options.prefix, options.dir);
 
-    return compose([ range, staticCache(options) ]);
+    return compose([ rangeMiddleware, staticCache(options) ]);
   }
 
-  const middlewares = [ range ];
+  const middlewares = [ rangeMiddleware ];
 
   for (const [ idx, dir ] of dirs.entries()) {
     // copy origin options to new options
