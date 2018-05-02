@@ -1,6 +1,6 @@
 {
   "name": "egg-static",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "static server plugin for egg",
   "eggPlugin": {
     "name": "static"
@@ -52,6 +52,9 @@
   "ci": {
     "version": "6, 7, 8",
     "license": true
+  },
+  "publishConfig": {
+    "tag": "latest-1"
   },
   "author": "dead_horse",
   "license": "MIT"

@@ -1,4 +1,10 @@
 
+1.5.1 / 2018-05-02
+==================
+
+**fixes**
+  * [[`3ff2b59`](http://github.com/eggjs/egg-static/commit/3ff2b5941137ce3811270f9e5eaaf1a94d715677)] - fix: range only work with static prefix url (#16) (Yiyu He <<dead_horse@qq.com>>)
+
 1.5.0 / 2018-01-10
 ==================
 
