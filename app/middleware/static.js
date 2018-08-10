@@ -19,14 +19,14 @@ module.exports = (options, app) => {
     dirs = options.dirs ? options.dirs : [ options.dir ];
   }
 
-
-  if (options.dynamic && !options.files) {
-    options.files = new LRU(options.maxFiles);
-  }
+  const prefixs = [];
 
   function rangeMiddleware(ctx, next) {
-    if (options.prefix && !ctx.path.startsWith(options.prefix)) return next();
-    return range(ctx, next);
+    // if match static file, and use range middleware.
+    if (prefixs.some(p => ctx.path.startsWith(p))) {
+      return range(ctx, next);
+    }
+    return next();
   }
 
   const middlewares = [ rangeMiddleware ];
@@ -44,6 +44,14 @@ module.exports = (options, app) => {
     } else {
       assert(is.string(dirObj.dir), true, 'options.dirs.dir must exist when options.dirs is object.');
       newOptions = Object.assign({}, options, dirObj);
+    }
+
+    if (newOptions.dynamic && !newOptions.files) {
+      newOptions.files = new LRU(newOptions.maxFiles);
+    }
+
+    if (newOptions.prefix) {
+      prefixs.push(newOptions.prefix);
     }
 
     // ensure directory exists
