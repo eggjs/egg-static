@@ -32,7 +32,7 @@ module.exports = (options, app) => {
   const middlewares = [ rangeMiddleware ];
 
   for (const dirObj of dirs) {
-    assert(is.object(dirObj) || is.string(dirObj), true, 'options.dir must be string or options.dirs must be string|object.');
+    assert(is.object(dirObj) || is.string(dirObj), true, 'options.dir must be string or options.dirs must be []<string|object>.');
 
     let newOptions;
 
@@ -42,7 +42,7 @@ module.exports = (options, app) => {
       // ensure the safety of objects
       newOptions.dir = dirObj;
     } else {
-      assert(is.string(dirObj.dir), true, 'options.dirs.dir must exist when options.dirs is object.');
+      assert(is.string(dirObj.dir), true, 'options.dirs[].dir must exist when options.dirs[] is object.');
       newOptions = Object.assign({}, options, dirObj);
     }
 
