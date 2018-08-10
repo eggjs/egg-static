@@ -112,13 +112,69 @@ describe('test/static.test.js', () => {
     });
   });
 
-  describe('serve multiple dist', () => {
+  describe('serve multiple folder with options.dir', () => {
     let app;
-    const jsFile = path.join(__dirname, 'fixtures/static-server-multiple-dist/dist/static/app/a.js');
+    const jsFile = path.join(__dirname, 'fixtures/static-server-with-dir/dist/static/app/a.js');
     before(() => {
       fs.writeFileSync(jsFile, 'console.log(\'a\')');
       app = mm.app({
-        baseDir: 'static-server-multiple-dist',
+        baseDir: 'static-server-with-dir',
+      });
+      return app.ready();
+    });
+
+    after(() => app.close());
+    after(() => fs.unlink(jsFile));
+
+    it('should get js correct from public folder', () => {
+      return request(app.callback())
+        .get('/public/foo.js')
+        .expect(/console.log\(\'bar\'\);[\r\n]/)
+        .expect(200);
+    });
+
+    it('should get js correct with range support', () => {
+      return request(app.callback())
+        .get('/public/foo.js')
+        .set('range', 'bytes=0-10')
+        .expect('Content-Length', '11')
+        .expect('Accept-Ranges', 'bytes')
+        .expect('Content-Range', 'bytes 0-10/20')
+        .expect('console.log')
+        .expect(206);
+    });
+
+    it('should get js correct from dist folder', () => {
+      return request(app.callback())
+        .get('/public/app/assets/foo-a1eb2031.js')
+        .expect(/define\("static\/app\/assets\/foo-a1eb2031"/)
+        .expect(200);
+    });
+
+    it('should cache file', done => {
+      request(app.callback())
+        .get('/public/app/a.js')
+        .expect('console.log(\'a\')')
+        .expect(200, err => {
+          assert(!err);
+
+          fs.writeFile(jsFile, 'console.log(\'b\')', () => {
+            request(app.callback())
+              .get('/public/app/a.js')
+              .expect('console.log(\'a\')')
+              .expect(200, done);
+          });
+        });
+    });
+  });
+
+  describe('serve multiple folder with options.dirs', () => {
+    let app;
+    const jsFile = path.join(__dirname, 'fixtures/static-server-with-dirs/dist/static/app/a.js');
+    before(() => {
+      fs.writeFileSync(jsFile, 'console.log(\'a\')');
+      app = mm.app({
+        baseDir: 'static-server-with-dirs',
       });
       return app.ready();
     });
