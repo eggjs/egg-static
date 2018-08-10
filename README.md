@@ -51,7 +51,7 @@ egg-static support all configurations in [koa-static-cache](https://github.com/k
 
 - In non-production environment, assets won't be cached, your modification can take effect immediately.
 - In production environment, `egg-static` will cache the assets after visited, you need to restart the process to update the assets.
-- Dir default is `$baseDir/app/public` but you can also define **multiple directory** by use `dir: [dir1, dir2, ...]` and static server will use all these directories.
+- Dir default is `$baseDir/app/public` but you can also define **multiple directory** by use `dirs: [dir1, dir2, ...]` or `dirs: [dir1, { prefix: '/static2', dir: dir2 }]`, static server will use all these directories.
 
 ```js
 // {app_root}/config/config.default.js

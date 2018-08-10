@@ -128,14 +128,14 @@ describe('test/static.test.js', () => {
 
     it('should get js correct from public folder', () => {
       return request(app.callback())
-        .get('/static/foo.js')
+        .get('/public/foo.js')
         .expect(/console.log\(\'bar\'\);[\r\n]/)
         .expect(200);
     });
 
     it('should get js correct with range support', () => {
       return request(app.callback())
-        .get('/static/foo.js')
+        .get('/public/foo.js')
         .set('range', 'bytes=0-10')
         .expect('Content-Length', '11')
         .expect('Accept-Ranges', 'bytes')
