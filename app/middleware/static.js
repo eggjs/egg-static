@@ -6,24 +6,18 @@ const staticCache = require('koa-static-cache');
 const assert = require('assert');
 const mkdirp = require('mkdirp');
 const LRU = require('ylru');
-const deprecate = require('depd')('egg-static');
 const is = require('is-type-of');
 
 module.exports = (options, app) => {
-  let dirs;
-
-  if (is.array(options.dir)) {
-    dirs = options.dir;
-    deprecate('options.dir array type support is deprecated, use options.dirs instead.');
-  } else {
-    dirs = options.dirs ? options.dirs : [ options.dir ];
-  }
+  let dirs = options.dir;
+  if (!is.array(dirs)) dirs = [ dirs ];
 
   const prefixs = [];
 
   function rangeMiddleware(ctx, next) {
     // if match static file, and use range middleware.
-    if (prefixs.some(p => ctx.path.startsWith(p))) {
+    const isMatch = prefixs.some(p => ctx.path.startsWith(p));
+    if (isMatch) {
       return range(ctx, next);
     }
     return next();
@@ -32,17 +26,15 @@ module.exports = (options, app) => {
   const middlewares = [ rangeMiddleware ];
 
   for (const dirObj of dirs) {
-    assert(is.object(dirObj) || is.string(dirObj), true, 'options.dir must be string or options.dirs must be []<string|object>.');
+    assert(is.object(dirObj) || is.string(dirObj), '`config.static.dir` must be `string | Array<string|object>`.');
 
     let newOptions;
 
     if (is.string(dirObj)) {
-      newOptions = Object.assign({}, options);
-      // copy origin options to new options
-      // ensure the safety of objects
-      newOptions.dir = dirObj;
+      // copy origin options to new options ensure the safety of objects
+      newOptions = Object.assign({}, options, { dir: dirObj });
     } else {
-      assert(is.string(dirObj.dir), true, 'options.dirs[].dir must exist when options.dirs[] is object.');
+      assert(is.string(dirObj.dir), '`config.static.dir` should contains `[].dir` property when object style.');
       newOptions = Object.assign({}, options, dirObj);
     }
 
