@@ -13,7 +13,7 @@ module.exports = {
     'egg-bin',
     'eslint',
     'eslint-config-egg',
-    'supertest',
+    'egg',
   ],
   exclude: [
     './test/fixtures',
