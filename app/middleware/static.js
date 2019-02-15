@@ -6,36 +6,45 @@ const staticCache = require('koa-static-cache');
 const assert = require('assert');
 const mkdirp = require('mkdirp');
 const LRU = require('ylru');
+const is = require('is-type-of');
 
 module.exports = (options, app) => {
-  const dirs = options.dir;
-  if (options.dynamic && !options.files) {
-    options.files = new LRU(options.maxFiles);
-  }
+  let dirs = options.dir;
+  if (!is.array(dirs)) dirs = [ dirs ];
+
+  const prefixs = [];
 
   function rangeMiddleware(ctx, next) {
-    if (options.prefix && !ctx.path.startsWith(options.prefix)) return next();
-    return range(ctx, next);
-  }
-
-  if (!Array.isArray(dirs)) {
-    assert.strictEqual(typeof options.dir, 'string', 'Must set `app.config.static.dir` when static plugin enable');
-    // ensure directory exists
-    mkdirp.sync(options.dir);
-
-    app.loggers.coreLogger.info('[egg-static] starting static serve %s -> %s', options.prefix, options.dir);
-
-    return compose([ rangeMiddleware, staticCache(options) ]);
+    // if match static file, and use range middleware.
+    const isMatch = prefixs.some(p => ctx.path.startsWith(p));
+    if (isMatch) {
+      return range(ctx, next);
+    }
+    return next();
   }
 
   const middlewares = [ rangeMiddleware ];
 
-  for (const [ idx, dir ] of dirs.entries()) {
-    // copy origin options to new options
-    // ensure the safety of objects
-    const newOptions = Object.assign({}, options);
-    newOptions.dir = dir;
-    assert.strictEqual(typeof newOptions.dir, 'string', 'Must set `app.config.static.dir[' + idx + ']` when static plugin enable');
+  for (const dirObj of dirs) {
+    assert(is.object(dirObj) || is.string(dirObj), '`config.static.dir` must be `string | Array<string|object>`.');
+
+    let newOptions;
+
+    if (is.string(dirObj)) {
+      // copy origin options to new options ensure the safety of objects
+      newOptions = Object.assign({}, options, { dir: dirObj });
+    } else {
+      assert(is.string(dirObj.dir), '`config.static.dir` should contains `[].dir` property when object style.');
+      newOptions = Object.assign({}, options, dirObj);
+    }
+
+    if (newOptions.dynamic && !newOptions.files) {
+      newOptions.files = new LRU(newOptions.maxFiles);
+    }
+
+    if (newOptions.prefix) {
+      prefixs.push(newOptions.prefix);
+    }
 
     // ensure directory exists
     mkdirp.sync(newOptions.dir);

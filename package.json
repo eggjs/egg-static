@@ -21,22 +21,22 @@
     "static"
   ],
   "dependencies": {
-    "koa-compose": "^4.0.0",
+    "is-type-of": "^1.2.1",
+    "koa-compose": "^4.1.0",
     "koa-range": "^0.3.0",
-    "koa-static-cache": "^5.1.1",
+    "koa-static-cache": "^5.1.2",
     "mkdirp": "^0.5.1",
-    "ylru": "^1.2.0"
+    "ylru": "^1.2.1"
   },
   "devDependencies": {
-    "autod": "^2.10.1",
-    "egg": "next",
-    "egg-bin": "^4.3.5",
-    "egg-ci": "^1.8.0",
-    "egg-mock": "^3.13.1",
-    "eslint": "^4.10.0",
-    "eslint-config-egg": "^5.1.1",
-    "mz": "^2.7.0",
-    "supertest": "^3.0.0"
+    "autod": "^3.0.1",
+    "egg": "^2.16.0",
+    "egg-bin": "^4.11.0",
+    "egg-ci": "^1.11.0",
+    "egg-mock": "^3.21.0",
+    "eslint": "^5.13.0",
+    "eslint-config-egg": "^7.1.0",
+    "mz": "^2.7.0"
   },
   "engines": {
     "node": ">=8.0.0"
