@@ -1,4 +1,10 @@
 
+2.2.0 / 2019-02-15
+==================
+
+**features**
+  * [[`7a4b927`](http://github.com/eggjs/egg-static/commit/7a4b927e53670af89005fde057c838825fe96a30)] - feat: add options.dir for support multi folder serve. (#17) (仙森 <<dapixp@gmail.com>>)
+
 2.1.1 / 2018-05-02
 ==================
 

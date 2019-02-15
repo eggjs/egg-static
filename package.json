@@ -1,6 +1,6 @@
 {
   "name": "egg-static",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "static server plugin for egg",
   "eggPlugin": {
     "name": "static"
