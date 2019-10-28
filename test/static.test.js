@@ -236,5 +236,25 @@ describe('test/static.test.js', () => {
         .expect('code', 0)
         .end();
     });
+
+    it('should compile ts-normal without error', () => {
+      return coffee.fork(
+        require.resolve('typescript/bin/tsc'),
+        [ '-p', path.resolve(__dirname, './fixtures/static-server-ts-normal/tsconfig.json') ]
+      )
+        .debug()
+        .expect('code', 0)
+        .end();
+    });
+
+    it('should compile ts-mix without error', () => {
+      return coffee.fork(
+        require.resolve('typescript/bin/tsc'),
+        [ '-p', path.resolve(__dirname, './fixtures/static-server-ts-mix/tsconfig.json') ]
+      )
+        .debug()
+        .expect('code', 0)
+        .end();
+    });
   });
 });
