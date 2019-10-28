@@ -1,8 +1,7 @@
-declare module "egg-static" {
-  // plain object
-  type PlainObject<T = any> = { [key: string]: T };
+import { PlainObject } from "egg";
 
-  interface IEggStaticConfig {
+declare module "egg" {
+  interface EggStaticConfig {
     prefix?: string;
     dir?: string | ({ prefix: string; dir: string } | string)[];
     // support lazy load
@@ -12,5 +11,7 @@ declare module "egg-static" {
     maxFiles?: number;
   }
 
-  export type EggStaticConfig = IEggStaticConfig & PlainObject;
+  interface EggAppConfig {
+    static: EggStaticConfig & PlainObject;
+  }
 }

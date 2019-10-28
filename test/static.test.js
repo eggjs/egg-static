@@ -4,6 +4,7 @@ const path = require('path');
 const { fs } = require('mz');
 const assert = require('assert');
 const mock = require('egg-mock');
+const coffee = require('coffee');
 
 describe('test/static.test.js', () => {
   describe('serve public', () => {
@@ -222,6 +223,18 @@ describe('test/static.test.js', () => {
               .expect(200, done);
           });
         });
+    });
+  });
+
+  describe('typescript', () => {
+    it('should compile ts without error', () => {
+      return coffee.fork(
+        require.resolve('typescript/bin/tsc'),
+        [ '-p', path.resolve(__dirname, './fixtures/static-server-ts/tsconfig.json') ]
+      )
+        .debug()
+        .expect('code', 0)
+        .end();
     });
   });
 });
