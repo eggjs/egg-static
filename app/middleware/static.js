@@ -9,8 +9,7 @@ const LRU = require('ylru');
 const is = require('is-type-of');
 
 module.exports = (options, app) => {
-  let dirs = options.dir;
-  if (!is.array(dirs)) dirs = [ dirs ];
+  const dirs = (options.dirs || []).concat(options.dir);
 
   const prefixs = [];
 

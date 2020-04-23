@@ -5,7 +5,7 @@ module.exports = appInfo => {
     keys: 'aaa',
     static: {
       prefix: '/public',
-      dir: [
+      dirs: [
         path.join(appInfo.baseDir, '/app/public'),
         {
           prefix: '/static',
