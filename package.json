@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "autod": "^3.0.1",
+    "coffee": "^5.2.2",
     "egg": "^2.16.0",
     "egg-bin": "^4.11.0",
     "egg-ci": "^1.11.0",
