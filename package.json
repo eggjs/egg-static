@@ -32,7 +32,8 @@
     "egg-bin": "5",
     "egg-mock": "5",
     "eslint": "8",
-    "eslint-config-egg": "12"
+    "eslint-config-egg": "12",
+    "git-contributor": "2"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -42,7 +43,8 @@
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
-    "ci": "npm run lint && npm run cov"
+    "ci": "npm run lint && npm run cov",
+    "contributor": "git-contributor"
   },
   "author": "dead_horse",
   "license": "MIT"
