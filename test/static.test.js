@@ -1,8 +1,5 @@
-'use strict';
-
 const path = require('path');
-const { fs } = require('mz');
-const assert = require('assert');
+const fs = require('fs/promises');
 const mock = require('egg-mock');
 
 describe('test/static.test.js', () => {
@@ -59,12 +56,12 @@ describe('test/static.test.js', () => {
   describe('serve dist', () => {
     let app;
     const jsFile = path.join(__dirname, 'fixtures/static-server-dist/dist/static/app/a.js');
-    before(() => {
-      fs.writeFileSync(jsFile, 'console.log(\'a\')');
+    before(async () => {
+      await fs.writeFile(jsFile, 'console.log(\'a\')');
       app = mock.app({
         baseDir: 'static-server-dist',
       });
-      return app.ready();
+      await app.ready();
     });
 
     after(() => app.close());
@@ -77,20 +74,16 @@ describe('test/static.test.js', () => {
         .expect(200);
     });
 
-    it('should cache file', done => {
-      app.httpRequest()
+    it('should cache file', async () => {
+      await app.httpRequest()
         .get('/static/app/a.js')
         .expect('console.log(\'a\')')
-        .expect(200, err => {
-          assert(!err);
-
-          fs.writeFile(jsFile, 'console.log(\'b\')', () => {
-            app.httpRequest()
-              .get('/static/app/a.js')
-              .expect('console.log(\'a\')')
-              .expect(200, done);
-          });
-        });
+        .expect(200);
+      await fs.writeFile(jsFile, 'console.log(\'b\')');
+      await app.httpRequest()
+        .get('/static/app/a.js')
+        .expect('console.log(\'a\')')
+        .expect(200);
     });
   });
 
@@ -116,12 +109,12 @@ describe('test/static.test.js', () => {
   describe('serve multiple folder with options.dir', () => {
     let app;
     const jsFile = path.join(__dirname, 'fixtures/static-server-with-dir/dist/static/app/a.js');
-    before(() => {
-      fs.writeFileSync(jsFile, 'console.log(\'a\')');
+    before(async () => {
+      await fs.writeFile(jsFile, 'console.log(\'a\')');
       app = mock.app({
         baseDir: 'static-server-with-dir',
       });
-      return app.ready();
+      await app.ready();
     });
 
     after(() => app.close());
@@ -152,32 +145,28 @@ describe('test/static.test.js', () => {
         .expect(200);
     });
 
-    it('should cache file', done => {
-      app.httpRequest()
+    it('should cache file', async () => {
+      await app.httpRequest()
         .get('/public/app/a.js')
         .expect('console.log(\'a\')')
-        .expect(200, err => {
-          assert(!err);
-
-          fs.writeFile(jsFile, 'console.log(\'b\')', () => {
-            app.httpRequest()
-              .get('/public/app/a.js')
-              .expect('console.log(\'a\')')
-              .expect(200, done);
-          });
-        });
+        .expect(200);
+      await fs.writeFile(jsFile, 'console.log(\'b\')');
+      await app.httpRequest()
+        .get('/public/app/a.js')
+        .expect('console.log(\'a\')')
+        .expect(200);
     });
   });
 
   describe('serve multiple folder with options.dirs', () => {
     let app;
     const jsFile = path.join(__dirname, 'fixtures/static-server-with-dirs/dist/static/app/a.js');
-    before(() => {
-      fs.writeFileSync(jsFile, 'console.log(\'a\')');
+    before(async () => {
+      await fs.writeFile(jsFile, 'console.log(\'a\')');
       app = mock.app({
         baseDir: 'static-server-with-dirs',
       });
-      return app.ready();
+      await app.ready();
     });
 
     after(() => app.close());
@@ -208,20 +197,16 @@ describe('test/static.test.js', () => {
         .expect(200);
     });
 
-    it('should cache file', done => {
-      app.httpRequest()
+    it('should cache file', async () => {
+      await app.httpRequest()
         .get('/static/app/a.js')
         .expect('console.log(\'a\')')
-        .expect(200, err => {
-          assert(!err);
-
-          fs.writeFile(jsFile, 'console.log(\'b\')', () => {
-            app.httpRequest()
-              .get('/static/app/a.js')
-              .expect('console.log(\'a\')')
-              .expect(200, done);
-          });
-        });
+        .expect(200);
+      await fs.writeFile(jsFile, 'console.log(\'b\')');
+      await app.httpRequest()
+        .get('/static/app/a.js')
+        .expect('console.log(\'a\')')
+        .expect(200);
     });
   });
 });
