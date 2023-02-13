@@ -1,7 +1,5 @@
-'use strict';
-
 const assert = require('assert');
-const { mkdirSync } = require('fs');
+const { mkdirSync, existsSync } = require('fs');
 const range = require('koa-range');
 const compose = require('koa-compose');
 const staticCache = require('koa-static-cache');
@@ -46,7 +44,9 @@ module.exports = (options, app) => {
     }
 
     // ensure directory exists
-    mkdirSync(newOptions.dir, { recursive: true });
+    if (!existsSync(newOptions.dir)) {
+      mkdirSync(newOptions.dir, { recursive: true });
+    }
 
     app.loggers.coreLogger.info('[egg-static] starting static serve %s -> %s', newOptions.prefix, newOptions.dir);
 
